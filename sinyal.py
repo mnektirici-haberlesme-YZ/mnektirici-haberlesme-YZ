@@ -1,8 +1,12 @@
-# Fiber sinyal kaybı hesaplayıcı - İlk projem
 mesafe = float(input("Mesafe km: "))
-kayip = mesafe * 0.35
+fiber = input("Fiber tipi single/multi: ")
+if fiber == "single":
+    oran = 0.35
+else:
+    oran = 2.5
+kayip = mesafe * oran
 print(f"Toplam kayip: {kayip} dB")
 if kayip > 20:
-    print("Guclendirici gerekli")
+    print("Guclendirici gerekli!")
 else:
     print("Sinyal normal")
