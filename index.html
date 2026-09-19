@@ -6,14 +6,15 @@
 <title>Elektronik Haberleşme + YZ</title>
 <style>
 body{margin:0;font-family:Arial;background:#0f121a;color:white}
-.header{background:linear-gradient(180deg,#1a2a5a,#0f121a);text-align:center;padding:60px 20px 40px}
-.header h1{font-size:36px;margin:0;font-weight:800;line-height:1.2}
-.header p{color:#6ea8ff;margin-top:12px;font-size:16px}
+.header{background:linear-gradient(180deg,#1a2a5a 0%,#0f121a 100%);text-align:center;padding:60px 20px 40px}
+.header h1{font-size:38px;margin:0;font-weight:800;line-height:1.1}
+.header p{color:#6ea8ff;margin-top:15px;font-size:15px;line-height:1.5}
 .container{padding:20px;max-width:600px;margin:auto}
-.card{background:#1e263d;border-radius:20px;padding:25px;margin-bottom:20px}
-.card h2{margin-top:0}
-a{color:#6ea8ff;text-decoration:none;font-weight:bold}
-a:hover{text-decoration:underline}
+.card{background:#1e263d;border-radius:20px;padding:25px;margin-bottom:20px;border:1px solid #2a344f}
+input,select{width:90%;padding:12px;border-radius:10px;border:none;margin:6px 0;background:#0f121a;color:white;font-size:16px}
+button{background:#6ea8ff;color:#0f121a;padding:12px 30px;border:none;border-radius:10px;font-weight:bold;font-size:16px;margin-top:10px;cursor:pointer}
+#sonuc{margin-top:15px;font-weight:bold;font-size:18px;color:#6ea8ff}
+a{color:#6ea8ff;text-decoration:none}
 </style>
 </head>
 <body>
@@ -27,9 +28,30 @@ a:hover{text-decoration:underline}
 <p>Elektronik Haberleşme öğrencisiyim. Yapay zeka destekli kodlama ile haberleşme sistemleri üzerine projeler geliştiriyorum. İlk projem: fiber optik sinyal kaybı hesaplayıcı.</p>
 </div>
 <div class="card">
-<h2>🚀 Projelerim</h2>
-<p><a href="sinyal.py">1. sinyal.py</a> - Fiber optik hat üzerinde sinyal kaybı hesaplayıcı</p>
+<h2>🚀 Projelerim - Hesaplayıcı</h2>
+<p>Fiber mesafesini gir ve anında kaybı hesapla:</p>
+<input id="mesafe" type="number" placeholder="Örn: 10 (km)">
+<select id="fiber">
+<option value="single">Single Mode (0.35 dB/km)</option>
+<option value="multi">Multi Mode (2.5 dB/km)</option>
+</select>
+<br>
+<button onclick="hesapla()">Hesapla</button>
+<p id="sonuc"></p>
+<hr style="border:0;border-top:1px solid #2a344f;margin:20px 0">
+<p style="font-size:13px">📄 Python kodu: <a href="sinyal.py">sinyal.py dosyasını gör</a></p>
 </div>
 </div>
+<script>
+function hesapla(){
+let m = parseFloat(document.getElementById('mesafe').value);
+if(!m){document.getElementById('sonuc').innerText="Lütfen mesafe gir!";return;}
+let f = document.getElementById('fiber').value;
+let oran = f=="single" ? 0.35 : 2.5;
+let kayip = m * oran;
+let mesaj = kayip>20 ? "⚠️ Güçlendirici gerekli!" : "✅ Sinyal normal";
+document.getElementById('sonuc').innerHTML = `Toplam Kayıp: <b>${kayip} dB</b><br>${mesaj}`;
+}
+</script>
 </body>
 </html>
