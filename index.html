@@ -3,26 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elektronik Haberleşme + YZ</title>
+<title>Münevver Ektirici - Elektronik Haberleşme + YZ</title>
 <style>
 body{margin:0;font-family:Arial;background:#0f121a;color:white}
 .header{
-background: radial-gradient(ellipse at center, #1e3a8a 0%, #0f121a 70%),
-linear-gradient(90deg, transparent 0%, rgba(110,168,255,0.15) 50%, transparent 100%);
+background: radial-gradient(ellipse at center, #1e3a8a 0%, #0f121a 80%),
+linear-gradient(90deg, transparent 0%, rgba(110,168,255,0.2) 50%, transparent 100%);
 text-align:center;padding:80px 20px 50px;position:relative;overflow:hidden}
-.header::before{
-content:'';position:absolute;top:0;left:0;right:0;bottom:0;
-background: repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(110,168,255,0.08) 80px, rgba(110,168,255,0.08) 82px);
-animation: shine 4s linear infinite}
-@keyframes shine{0%{transform:translateX(-100px)}100%{transform:translateX(100px)}}
-.header h1{font-size:38px;margin:0;font-weight:800;position:relative;z-index:1}
-.header p{color:#6ea8ff;margin-top:15px;font-size:15px;position:relative;z-index:1}
+.header h1{font-size:36px;margin:0;font-weight:800;position:relative;z-index:1;line-height:1.1}
+.header p{color:#6ea8ff;margin-top:15px;font-size:15px;position:relative;z-index:1;font-weight:bold}
 .container{padding:20px;max-width:600px;margin:auto}
 .card{background:#1e263d;border-radius:20px;padding:25px;margin-bottom:20px;border:1px solid #2a344f}
+.student-badge{background:linear-gradient(180deg,#ffffff 0%,#f1f5f9 100%);color:#1e293b;border-radius:16px;padding:0;overflow:hidden;text-align:center;border:2px solid #1e3a8a}
+.badge-top{background:#1e3a8a;color:white;padding:15px}
+.badge-top b{font-size:16px;letter-spacing:1px}
+.badge-body{padding:20px}
+.badge-body h3{margin:5px 0;color:#1e3a8a;font-size:22px}
+.badge-green{color:#16a34a;font-weight:bold;font-size:18px;margin-top:15px}
 input,select{width:90%;padding:12px;border-radius:10px;border:none;margin:6px 0;background:#0f121a;color:white;font-size:16px}
 button{background:#6ea8ff;color:#0f121a;padding:12px 30px;border:none;border-radius:10px;font-weight:bold;font-size:16px;margin-top:10px;cursor:pointer}
 #sonuc{margin-top:15px;font-weight:bold;font-size:18px;color:#6ea8ff}
-.linkedin-btn{display:inline-block;background:#0077b5;color:white!important;padding:12px 25px;border-radius:10px;font-weight:bold;margin-top:10px}
+.linkedin-btn{display:inline-block;background:#0077b5;color:white!important;padding:12px 25px;border-radius:10px;font-weight:bold;margin-top:10px;text-decoration:none}
 </style>
 </head>
 <body>
@@ -31,9 +32,25 @@ button{background:#6ea8ff;color:#0f121a;padding:12px 30px;border:none;border-rad
 <p>Fiber Optik • Sinyal İşleme • Yapay Zeka<br>Destekli Kodlama</p>
 </div>
 <div class="container">
+
+<div class="card student-badge">
+<div class="badge-top"><b>ANADOLU ÜNİVERSİTESİ</b><br><small>BİLGİ DOĞRULAMA</small></div>
+<div class="badge-body">
+<h3>MÜNEVVER EKTİRİCİ</h3>
+<p style="margin:5px 0;font-weight:bold">AÇIKÖĞRETİM FAKÜLTESİ</p>
+<small style="color:#64748b">OPEN EDUCATION FACULTY</small>
+<p style="margin-top:15px;font-weight:bold">YAPAY ZEKA DESTEKLİ KODLAMA</p>
+<small style="color:#64748b">ARTIFICIAL INTELLIGENCE ASSISTED PROGRAMMING</small>
+<div class="badge-green">AKTİF ÖĞRENCİ<br><small style="font-size:12px">ACTIVE STUDENT</small></div>
+</div>
+</div>
+
 <div class="card"><h2>👋 Hakkımda</h2><p>Elektronik Haberleşme Sistemleri ve İşletme Fakültesi mezunuyum. Şu anda Yapay Zeka Destekli Kodlama alanında ön lisans eğitimime devam ediyor, haberleşme sistemlerini yapay zeka ile birleştiren projeler geliştiriyorum.</p></div>
-<div class="card"><h2>🚀 Projelerim - Hesaplayıcı</h2><input id="mesafe" type="number" placeholder="Örn: 10 (km)"><select id="fiber"><option value="single">Single Mode (0.35 dB/km)</option><option value="multi">Multi Mode (2.5 dB/km)</option></select><br><button onclick="hesapla()">Hesapla</button><p id="sonuc"></p></div>
+
+<div class="card"><h2>🚀 Projelerim - Hesaplayıcı</h2><p>Fiber mesafesini gir ve kaybı hesapla:</p><input id="mesafe" type="number" placeholder="Örn: 10 (km)"><select id="fiber"><option value="single">Single Mode (0.35 dB/km)</option><option value="multi">Multi Mode (2.5 dB/km)</option></select><br><button onclick="hesapla()">Hesapla</button><p id="sonuc"></p></div>
+
 <div class="card" style="text-align:center"><h2>📬 İletişim</h2><a href="https://www.linkedin.com/in/m%C3%BCnevver-ektirici-9556ba335" target="_blank" class="linkedin-btn">LinkedIn Profilim</a></div>
+
 </div>
 <script>
 function hesapla(){let m=parseFloat(document.getElementById('mesafe').value);if(!m){document.getElementById('sonuc').innerText="Lütfen mesafe gir!";return;}let f=document.getElementById('fiber').value;let oran=f=="single"?0.35:2.5;let kayip=m*oran;let mesaj=kayip>20?"⚠️ Güçlendirici gerekli!":"✅ Sinyal normal";document.getElementById('sonuc').innerHTML=`Toplam Kayıp: <b>${kayip} dB</b><br>${mesaj}`;}
