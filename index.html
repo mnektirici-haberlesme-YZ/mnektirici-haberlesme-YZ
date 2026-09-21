@@ -82,22 +82,3 @@ cursor:pointer;margin-top:10px
 </div>
 </div>
 
-<script>
-function hesapla(){
-let m = parseFloat(document.getElementById('mesafe').value);
-let kayip = parseFloat(document.getElementById('mod').value);
-if(isNaN(m)){alert("Mesafe gir");return;}
-let toplam = m * kayip;
-let html = `Toplam Kayıp: ${toplam.toFixed(1)} dB`;
-if(toplam > 30){
-html += `<div class="warn">⚠️ Güçlendirici gerekli!</div>`;
-}else{
-html += `<div style="color:#4ade80;margin-top:5px">✅ Sinyal seviyesi iyi</div>`;
-}
-document.getElementById('sonuc').innerHTML = html;
-}
-window.onload = hesapla;
-</script>
-
-</body>
-</html>
