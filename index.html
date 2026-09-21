@@ -6,20 +6,23 @@
 <title>Fiber Optik Haberleşme ve YZ</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,sans-serif;background:#0a1220;color:white}
+body{font-family:'Segoe UI',sans-serif;background:#080f1e;color:white;scroll-behavior:smooth}
 .hero{
-height:85vh;
-background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.7)),url('fiber.jpg');
+height:100vh;
+background:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7)),url('fiber.jpg');
 background-size:cover;background-position:center;
 display:flex;align-items:center;justify-content:center;text-align:center;padding:20px
 }
-.hero h1{font-size:2.6rem;line-height:1.2}
-.hero p{margin:15px 0;opacity:0.9}
-.btn{display:inline-block;padding:13px 28px;background:#00a6ff;color:white;text-decoration:none;border-radius:25px;font-weight:bold;margin-top:10px}
-.box{max-width:500px;margin:30px auto;background:#16233f;padding:25px;border-radius:15px;border:1px solid #24406f}
-.box input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #2e5aa0;background:#0a1220;color:white}
-.box button{width:100%;padding:13px;background:#00a6ff;color:white;border:none;border-radius:8px;font-weight:bold;font-size:16px}
-#sonuc{margin-top:15px;background:#0a1220;padding:15px;border-radius:8px;display:none}
+.hero h1{font-size:3rem;font-weight:800;line-height:1.1;text-shadow:0 2px 10px #000}
+.hero p{margin-top:18px;font-size:1.1rem;max-width:650px;opacity:0.95}
+.btn{display:inline-block;margin-top:25px;padding:14px 32px;background:#0d8bff;color:white;text-decoration:none;border-radius:30px;font-weight:bold}
+.section{max-width:900px;margin:auto;padding:60px 20px}
+.card{background:#12203a;padding:30px;border-radius:16px;border:1px solid #1f3a65;margin-top:20px}
+.calc{max-width:500px;margin:20px auto;background:#111f38;padding:25px;border-radius:16px;border:1px solid #23406d}
+.calc input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #2a4f85;background:#080f1e;color:white}
+.calc button{width:100%;padding:13px;background:#0d8bff;color:white;border:none;border-radius:8px;font-weight:bold;font-size:16px;cursor:pointer}
+#sonuc{margin-top:15px;background:#080f1e;padding:15px;border-radius:8px;display:none}
+h2{color:#0d8bff}
 </style>
 </head>
 <body>
@@ -28,34 +31,4 @@ display:flex;align-items:center;justify-content:center;text-align:center;padding
 <div>
 <h1>Fiber Optik<br>Haberleşme<br>ve YZ</h1>
 <p>Yüksek hızlı, düşük kayıplı ve elektromanyetik girişime dayanıklı haberleşme sistemleri için yapay zeka destekli çözümler.</p>
-<a class="btn" href="#hesap">Projeyi İncele</a>
-</div>
-</div>
-
-<div id="hesap" class="box">
-<h3 style="text-align:center;margin-bottom:10px;">🔬 Sinyal Hesaplayıcı</h3>
-<label>Giriş Gücü (dBm)</label>
-<input id="g" type="number" value="10">
-<label>Uzunluk (km)</label>
-<input id="u" type="number" value="25">
-<button onclick="hesap()">HESAPLA</button>
-<div id="sonuc"></div>
-</div>
-
-<script>
-function hesap(){
-let g = parseFloat(document.getElementById('g').value);
-let u = parseFloat(document.getElementById('u').value);
-let kayip = 0.2;
-let toplam = u * kayip;
-let cikis = g - toplam;
-let mw = Math.pow(10, cikis/10).toFixed(4);
-let durum = cikis < -25 ? "🔴 ZAYIF" : "🟢 İYİ";
-let s = document.getElementById('sonuc');
-s.style.display='block';
-s.innerHTML = "Toplam Kayıp: " + toplam.toFixed(2) + " dB<br>Çıkış: " + cikis.toFixed(2) + " dBm (" + mw + " mW)<br><br>Durum: " + durum;
-}
-</script>
-
-</body>
-</html>
+<a
