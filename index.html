@@ -8,21 +8,40 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',sans-serif;background:#080f1e;color:white;scroll-behavior:smooth}
 .hero{
-height:100vh;
-background:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7)),url('fiber.jpg');
+height:85vh;
+background:linear-gradient(rgba(0,0,0,0.2),rgba(8,15,30,1)),url('fiber.jpg');
 background-size:cover;background-position:center;
 display:flex;align-items:center;justify-content:center;text-align:center;padding:20px
 }
-.hero h1{font-size:3rem;font-weight:800;line-height:1.1;text-shadow:0 2px 10px #000}
-.hero p{margin-top:18px;font-size:1.1rem;max-width:650px;opacity:0.95}
-.btn{display:inline-block;margin-top:25px;padding:14px 32px;background:#0d8bff;color:white;text-decoration:none;border-radius:30px;font-weight:bold}
-.section{max-width:900px;margin:auto;padding:60px 20px}
-.card{background:#12203a;padding:30px;border-radius:16px;border:1px solid #1f3a65;margin-top:20px}
-.calc{max-width:500px;margin:20px auto;background:#111f38;padding:25px;border-radius:16px;border:1px solid #23406d}
-.calc input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #2a4f85;background:#080f1e;color:white}
-.calc button{width:100%;padding:13px;background:#0d8bff;color:white;border:none;border-radius:8px;font-weight:bold;font-size:16px;cursor:pointer}
-#sonuc{margin-top:15px;background:#080f1e;padding:15px;border-radius:8px;display:none}
-h2{color:#0d8bff}
+.hero h1{font-size:3rem;font-weight:800;line-height:1.1}
+.hero p{margin-top:15px;opacity:0.9}
+.btn{display:inline-block;margin-top:20px;padding:13px 28px;background:#6aa6ff;color:#000;text-decoration:none;border-radius:25px;font-weight:bold}
+
+.container{max-width:600px;margin:auto;padding:20px}
+.card{
+background:#121e36;
+border:1px solid #1e335f;
+border-radius:20px;
+padding:25px;
+margin-bottom:20px;
+}
+.card p{line-height:1.6;opacity:0.95}
+.card h2{font-size:1.4rem;margin-bottom:15px;display:flex;gap:8px;align-items:center}
+
+input, select{
+width:100%;padding:14px;margin:8px 0;
+border-radius:10px;border:1px solid #2a4a7f;
+background:#080f1e;color:white;font-size:1rem;
+}
+.btn2{
+width:100%;padding:14px;background:#8ab4ff;color:#000;
+border:none;border-radius:12px;font-weight:800;font-size:1.1rem;
+cursor:pointer;margin-top:10px
+}
+.result{margin-top:15px;font-weight:bold}
+.warn{color:#fbbf24;margin-top:5px}
+.link{margin-top:20px;border-top:1px solid #1e335f;padding-top:15px;font-size:0.9rem;opacity:0.8}
+.link a{color:#8ab4ff;text-decoration:none}
 </style>
 </head>
 <body>
@@ -30,5 +49,55 @@ h2{color:#0d8bff}
 <div class="hero">
 <div>
 <h1>Fiber Optik<br>Haberleşme<br>ve YZ</h1>
-<p>Yüksek hızlı, düşük kayıplı ve elektromanyetik girişime dayanıklı haberleşme sistemleri için yapay zeka destekli çözümler.</p>
-<a
+<p>Yüksek hızlı ve dayanıklı haberleşme için YZ çözümleri</p>
+<a class="btn" href="#hakkimda">Projeyi İncele</a>
+</div>
+</div>
+
+<div class="container">
+<div id="hakkimda" class="card">
+<h2>👋 Hakkımda</h2>
+<p>Elektronik Haberleşme Sistemleri ve İşletme Fakültesi mezunuyum. Şu anda Yapay Zeka Destekli Kodlama alanında ön lisans eğitimime devam ediyor, haberleşme sistemlerini yapay zeka ile birleştiren projeler geliştiriyorum.</p>
+</div>
+
+<div class="card">
+<h2>🚀 Projelerim - Hesaplayıcı</h2>
+<p style="opacity:0.8;margin-bottom:12px;">Fiber mesafesini gir ve anında kaybı hesapla:</p>
+
+<input id="mesafe" type="number" placeholder="Örn: 3010" value="3010">
+
+<select id="mod">
+<option value="0.35">Single Mode (0.35 dB/km)</option>
+<option value="0.2">Long Haul (0.2 dB/km)</option>
+<option value="2.5">Multi Mode (2.5 dB/km)</option>
+</select>
+
+<button class="btn2" onclick="hesapla()">Hesapla</button>
+
+<div class="result" id="sonuc"></div>
+
+<div class="link">
+📄 Python kodu: <a href="https://github.com/mnektirici-haberlesme-yz/mnektirici-haberlesme-yz.github.io/blob/main/sinyal.py" target="_blank">sinyal.py dosyasını gör</a>
+</div>
+</div>
+</div>
+
+<script>
+function hesapla(){
+let m = parseFloat(document.getElementById('mesafe').value);
+let kayip = parseFloat(document.getElementById('mod').value);
+if(isNaN(m)){alert("Mesafe gir");return;}
+let toplam = m * kayip;
+let html = `Toplam Kayıp: ${toplam.toFixed(1)} dB`;
+if(toplam > 30){
+html += `<div class="warn">⚠️ Güçlendirici gerekli!</div>`;
+}else{
+html += `<div style="color:#4ade80;margin-top:5px">✅ Sinyal seviyesi iyi</div>`;
+}
+document.getElementById('sonuc').innerHTML = html;
+}
+window.onload = hesapla;
+</script>
+
+</body>
+</html>
