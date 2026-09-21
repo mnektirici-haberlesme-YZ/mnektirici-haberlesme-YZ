@@ -1,74 +1,32 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mıknatıslı Haberleşme YZ - Fiber Optik Sistemler</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI', Arial, sans-serif;background:#0a1220;color:white}
-.hero{
-height:100vh;
-background: linear-gradient(rgba(5,15,35,0.6), rgba(5,15,35,0.85)), url('fiber.jpg');
-background-size:cover;
-background-position:center;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:20px
-}
-.hero-content h1{font-size:3rem;margin-bottom:15px;letter-spacing:1px}
-.hero-content p{font-size:1.2rem;opacity:0.9;margin-bottom:25px;max-width:700px}
-.btn{
-display:inline-block;
-padding:14px 32px;
-background:#00a6ff;
-color:white;
-text-decoration:none;
-border-radius:30px;
-font-weight:bold;
-transition:0.3s
-}
-.btn:hover{background:#0084cc;transform:scale(1.05)}
-.section{padding:60px 20px;max-width:1100px;margin:auto}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:30px}
-.card{background:#121e36;padding:25px;border-radius:15px;border:1px solid #1e335f}
-.card h3{color:#00a6ff;margin-bottom:10px}
-footer{text-align:center;padding:30px;opacity:0.6;border-top:1px solid #1e335f;margin-top:40px}
-</style>
-</head>
-<body>
+import math
 
-<div class="hero">
-<div class="hero-content">
-<h1>Fiber Optik Haberleşme ve YZ</h1>
-<p>Yüksek hızlı, düşük kayıplı ve elektromanyetik girişime dayanıklı haberleşme sistemleri için yapay zeka destekli çözümler.</p>
-<a href="#proje" class="btn">Projeyi İncele</a>
-</div>
-</div>
+def fiber_hesapla(guc_in_dbm, uzunluk_km, kayip_db_per_km=0.2, ek_kayip_db=0):
+    """
+    Fiber optik güç hesaplayıcı
+    guc_in_dbm: Giriş gücü (dBm)
+    uzunluk_km: Fiber uzunluğu (km)
+    kayip_db_per_km: km başına kayıp (tipik 0.2 dB/km)
+    """
+    toplam_kayip = (uzunluk_km * kayip_db_per_km) + ek_kayip_db
+    guc_out_dbm = guc_in_dbm - toplam_kayip
+    
+    # mW'a çevir
+    guc_out_mw = 10 ** (guc_out_dbm / 10)
+    
+    return {
+        "toplam_kayip_db": round(toplam_kayip, 2),
+        "cikis_gucu_dbm": round(guc_out_dbm, 2),
+        "cikis_gucu_mw": round(guc_out_mw, 4)
+    }
 
-<div class="section" id="proje">
-<h2 style="text-align:center;font-size:2rem;">Proje Hakkında</h2>
-<div class="cards">
-<div class="card">
-<h3>⚡ Yüksek Hız</h3>
-<p>Işık hızında veri iletimi ile gecikmesiz haberleşme altyapısı.</p>
-</div>
-<div class="card">
-<h3>🛡️ Güvenli İletim</h3>
-<p>EMI'ye karşı tam bağışıklık ve dinlemeye karşı güvenli yapı.</p>
-</div>
-<div class="card">
-<h3>🤖 YZ Optimizasyonu</h3>
-<p>sinyal.py ile sinyal kaybı ve gürültü için akıllı analiz.</p>
-</div>
-</div>
-</div>
+# Test
+if __name__ == "__main__":
+    sonuc = fiber_hesapla(guc_in_dbm=10, uzunluk_km=25)
+    print(f"Toplam Kayıp: {sonuc['toplam_kayip_db']} dB")
+    print(f"Çıkış Gücü: {sonuc['cikis_gucu_dbm']} dBm ({sonuc['cikis_gucu_mw']} mW)")
 
-<footer>
-<p>© 2026 mnektirici-haberlesme-YZ | Diyarbakır</p>
-</div>
-
-</body>
-</html>
+    # Uyarı
+    if sonuc['cikis_gucu_dbm'] < -25:
+        print("UYARI: Sinyal çok zayıf! Amplifikatör gerekebilir.")
+    else:
+        print("Sinyal seviyesi OK.")
