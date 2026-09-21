@@ -1,32 +1,61 @@
-import math
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiber Optik Haberleşme ve YZ</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#0a1220;color:white}
+.hero{
+height:85vh;
+background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.7)),url('fiber.jpg');
+background-size:cover;background-position:center;
+display:flex;align-items:center;justify-content:center;text-align:center;padding:20px
+}
+.hero h1{font-size:2.6rem;line-height:1.2}
+.hero p{margin:15px 0;opacity:0.9}
+.btn{display:inline-block;padding:13px 28px;background:#00a6ff;color:white;text-decoration:none;border-radius:25px;font-weight:bold;margin-top:10px}
+.box{max-width:500px;margin:30px auto;background:#16233f;padding:25px;border-radius:15px;border:1px solid #24406f}
+.box input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #2e5aa0;background:#0a1220;color:white}
+.box button{width:100%;padding:13px;background:#00a6ff;color:white;border:none;border-radius:8px;font-weight:bold;font-size:16px}
+#sonuc{margin-top:15px;background:#0a1220;padding:15px;border-radius:8px;display:none}
+</style>
+</head>
+<body>
 
-def fiber_hesapla(guc_in_dbm, uzunluk_km, kayip_db_per_km=0.2, ek_kayip_db=0):
-    """
-    Fiber optik güç hesaplayıcı
-    guc_in_dbm: Giriş gücü (dBm)
-    uzunluk_km: Fiber uzunluğu (km)
-    kayip_db_per_km: km başına kayıp (tipik 0.2 dB/km)
-    """
-    toplam_kayip = (uzunluk_km * kayip_db_per_km) + ek_kayip_db
-    guc_out_dbm = guc_in_dbm - toplam_kayip
-    
-    # mW'a çevir
-    guc_out_mw = 10 ** (guc_out_dbm / 10)
-    
-    return {
-        "toplam_kayip_db": round(toplam_kayip, 2),
-        "cikis_gucu_dbm": round(guc_out_dbm, 2),
-        "cikis_gucu_mw": round(guc_out_mw, 4)
-    }
+<div class="hero">
+<div>
+<h1>Fiber Optik<br>Haberleşme<br>ve YZ</h1>
+<p>Yüksek hızlı, düşük kayıplı ve elektromanyetik girişime dayanıklı haberleşme sistemleri için yapay zeka destekli çözümler.</p>
+<a class="btn" href="#hesap">Projeyi İncele</a>
+</div>
+</div>
 
-# Test
-if __name__ == "__main__":
-    sonuc = fiber_hesapla(guc_in_dbm=10, uzunluk_km=25)
-    print(f"Toplam Kayıp: {sonuc['toplam_kayip_db']} dB")
-    print(f"Çıkış Gücü: {sonuc['cikis_gucu_dbm']} dBm ({sonuc['cikis_gucu_mw']} mW)")
+<div id="hesap" class="box">
+<h3 style="text-align:center;margin-bottom:10px;">🔬 Sinyal Hesaplayıcı</h3>
+<label>Giriş Gücü (dBm)</label>
+<input id="g" type="number" value="10">
+<label>Uzunluk (km)</label>
+<input id="u" type="number" value="25">
+<button onclick="hesap()">HESAPLA</button>
+<div id="sonuc"></div>
+</div>
 
-    # Uyarı
-    if sonuc['cikis_gucu_dbm'] < -25:
-        print("UYARI: Sinyal çok zayıf! Amplifikatör gerekebilir.")
-    else:
-        print("Sinyal seviyesi OK.")
+<script>
+function hesap(){
+let g = parseFloat(document.getElementById('g').value);
+let u = parseFloat(document.getElementById('u').value);
+let kayip = 0.2;
+let toplam = u * kayip;
+let cikis = g - toplam;
+let mw = Math.pow(10, cikis/10).toFixed(4);
+let durum = cikis < -25 ? "🔴 ZAYIF" : "🟢 İYİ";
+let s = document.getElementById('sonuc');
+s.style.display='block';
+s.innerHTML = "Toplam Kayıp: " + toplam.toFixed(2) + " dB<br>Çıkış: " + cikis.toFixed(2) + " dBm (" + mw + " mW)<br><br>Durum: " + durum;
+}
+</script>
+
+</body>
+</html>
