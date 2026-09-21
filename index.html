@@ -3,30 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fiber Optik</title>
+<title>Fiber Optik Haberleşme ve YZ</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial;background:#080f1e;color:white}
-.hero{height:75vh;background:linear-gradient(rgba(0,0,0,0.2),#080f1e),url('fiber.jpg');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;text-align:center}
-.card{max-width:500px;margin:20px auto;background:#121e36;border:1px solid #1e335f;border-radius:20px;padding:25px}
-input,select{width:100%;padding:14px;margin:8px 0;border-radius:10px;border:1px solid #2a4a7f;background:#080f1e;color:white}
-button{width:100%;padding:14px;background:#8ab4ff;border:none;border-radius:12px;font-weight:800;font-size:1.1rem;cursor:pointer}
+body{font-family:'Segoe UI',sans-serif;background:#080f1e;color:white;scroll-behavior:smooth}
+.hero{height:80vh;background:linear-gradient(rgba(0,0,0,0.2),rgba(8,15,30,1)),url('fiber.jpg');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.hero h1{font-size:2.8rem;font-weight:800;line-height:1.1}
+.btn{display:inline-block;margin-top:20px;padding:13px 28px;background:#8ab4ff;color:#000;text-decoration:none;border-radius:25px;font-weight:bold}
+.container{max-width:600px;margin:auto;padding:20px}
+.card{background:#121e36;border:1px solid #1e335f;border-radius:20px;padding:25px;margin-bottom:20px}
+.card h2{margin-bottom:12px}
+.card p{line-height:1.6;opacity:0.9}
+input,select{width:100%;padding:14px;margin:8px 0;border-radius:10px;border:1px solid #2a4a7f;background:#080f1e;color:white;font-size:1rem}
+button{width:100%;padding:14px;background:#8ab4ff;color:#000;border:none;border-radius:12px;font-weight:800;font-size:1.1rem;cursor:pointer;margin-top:8px}
 #sonucAlani{margin-top:15px;padding:12px;background:#080f1e;border-radius:10px;min-height:50px;font-weight:bold;border:1px dashed #2a4a7f}
+.link{margin-top:15px;font-size:0.9rem}
+.link a{color:#8ab4ff;text-decoration:none}
 </style>
 </head>
 <body>
 
 <div class="hero">
 <div>
-<h1>Fiber Optik Haberleşme ve YZ</h1>
-<br>
-<a href="#hesap" style="background:#6aa6ff;color:black;padding:12px 25px;border-radius:25px;text-decoration:none;font-weight:bold">Projeyi İncele</a>
+<h1>Fiber Optik<br>Haberleşme<br>ve YZ</h1>
+<p style="margin-top:10px;opacity:0.8">Yüksek hızlı ve dayanıklı haberleşme için YZ çözümleri</p>
+<a class="btn" href="#hakkimda">Projeyi İncele</a>
+</div>
+</div>
+
+<div class="container">
+
+<div id="hakkimda" class="card">
+<h2>👋 Hakkımda</h2>
+<p>Elektronik Haberleşme Sistemleri ve İşletme Fakültesi mezunuyum. Şu anda Yapay Zeka Destekli Kodlama alanında ön lisans eğitimime devam ediyor, haberleşme sistemlerini yapay zeka ile birleştiren projeler geliştiriyorum.</p>
+</div>
+
+<div class="card">
+<h2>🔗 LinkedIn & İletişim</h2>
+<p>Projelerimi ve çalışmalarımı buradan takip edebilirsiniz.</p>
+<div class="link">
+<a href="https://www.linkedin.com/in/" target="_blank">LinkedIn Profilim</a> | Diyarbakır
 </div>
 </div>
 
 <div id="hesap" class="card">
 <h2>🚀 Projelerim - Hesaplayıcı</h2>
-<input id="mesafe" type="number" value="3010">
+<p style="margin-bottom:10px">Fiber mesafesini gir ve anında kaybı hesapla:</p>
+<input id="mesafe" type="number" value="3010" placeholder="Örn: 3010">
 <select id="mod">
 <option value="0.35">Single Mode (0.35 dB/km)</option>
 <option value="0.2">Long Haul (0.2 dB/km)</option>
@@ -34,29 +57,24 @@ button{width:100%;padding:14px;background:#8ab4ff;border:none;border-radius:12px
 </select>
 <button onclick="hesapYap()">Hesapla</button>
 <div id="sonucAlani">Sonuç burada görünecek...</div>
+<div class="link">
+📄 Python kodu: <a href="https://github.com/mnektirici-haberlesme-yz/mnektirici-haberlesme-yz.github.io/blob/main/sinyal.py" target="_blank">sinyal.py dosyasını gör</a>
+</div>
+</div>
+
 </div>
 
 <script>
-function hesapYap() {
-  var m = parseFloat(document.getElementById("mesafe").value);
-  var k = parseFloat(document.getElementById("mod").value);
-  var sonucDiv = document.getElementById("sonucAlani");
-
-  if (isNaN(m)) {
-    sonucDiv.innerHTML = "Lütfen mesafe girin!";
-    return;
-  }
-
-  var toplam = m * k;
-  var mesaj = "Toplam Kayıp: " + toplam.toFixed(1) + " dB<br>";
-  
-  if (toplam > 30) {
-    mesaj += "<span style='color:#fbbf24'>⚠️ Güçlendirici gerekli!</span>";
-  } else {
-    mesaj += "<span style='color:#4ade80'>✅ Sinyal iyi</span>";
-  }
-  
-  sonucDiv.innerHTML = mesaj;
+function hesapYap(){
+var m=parseFloat(document.getElementById("mesafe").value);
+var k=parseFloat(document.getElementById("mod").value);
+var div=document.getElementById("sonucAlani");
+if(isNaN(m)){div.innerHTML="Lütfen mesafe gir!";return;}
+var toplam=m*k;
+var mesaj="Toplam Kayıp: "+toplam.toFixed(1)+" dB<br>";
+if(toplam>30){mesaj+="<span style='color:#fbbf24'>⚠️ Güçlendirici gerekli!</span>";}
+else{mesaj+="<span style='color:#4ade80'>✅ Sinyal iyi</span>";}
+div.innerHTML=mesaj;
 }
 </script>
 
